@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bv7gkcaol0w5k"]
+
+[ext_resource type="PackedScene" uid="uid://cbaq478a461cy" path="res://game/scenes/player.tscn" id="1_mgl70"]
+[ext_resource type="Script" path="res://game/scenes/player_sandbox.gd" id="1_mrow6"]
+
+[node name="PlayerSandbox" type="Node"]
+script = ExtResource("1_mrow6")
+
+[node name="Player" parent="." instance=ExtResource("1_mgl70")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://game/scenes/bullet.tscn")
+spawn_path = NodePath("..")

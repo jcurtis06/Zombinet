@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://c43e5swweyipi"]
 
-[ext_resource type="Script" path="res://demo/scenes/demo_game.gd" id="1_dslyh"]
-[ext_resource type="Script" path="res://demo/scenes/demo_ui.gd" id="1_v7r5m"]
-[ext_resource type="Texture2D" uid="uid://dsfa83baol30l" path="res://demo/sprites/bg.png" id="2_2csq0"]
+[ext_resource type="Script" path="res://game/scenes/main.gd" id="1_wrrka"]
+[ext_resource type="Script" path="res://game/scenes/ui.gd" id="2_wx6qr"]
+[ext_resource type="Texture2D" uid="uid://dsfa83baol30l" path="res://game/sprites/bg.png" id="3_cs0d6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wnn7"]
 content_margin_left = 10.0
@@ -61,8 +61,8 @@ LineEdit/colors/font_placeholder_color = Color(0, 0, 0, 0.6)
 LineEdit/font_sizes/font_size = 24
 LineEdit/styles/normal = SubResource("StyleBoxFlat_i1kyy")
 
-[node name="Demo" type="Node2D"]
-script = ExtResource("1_dslyh")
+[node name="Zombinet" type="Node2D"]
+script = ExtResource("1_wrrka")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -74,7 +74,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_22tuh")
-script = ExtResource("1_v7r5m")
+script = ExtResource("2_wx6qr")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Multiplayer"]
 layout_mode = 1
@@ -118,6 +118,11 @@ text = "Host Game"
 layout_mode = 2
 text = "Start Game"
 
+[node name="Label" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "1200"
+
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -130,14 +135,24 @@ offset_right = 2252.0
 offset_bottom = 2018.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_2csq0")
+texture = ExtResource("3_cs0d6")
 stretch_mode = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://demo/scenes/player.tscn")
+_spawnable_scenes = PackedStringArray("res://game/scenes/player_sandbox.tscn")
 spawn_path = NodePath("..")
+
+[node name="ZombieSpawn" type="Node2D" parent="."]
+position = Vector2(843, 453)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ZombieSpawn"]
+_spawnable_scenes = PackedStringArray("res://game/scenes/zombie.tscn")
+spawn_path = NodePath("..")
+
+[node name="Clock" type="Timer" parent="."]
 
 [connection signal="pressed" from="UI/Multiplayer/VBoxContainer/HBoxContainer/Join" to="UI/Multiplayer" method="_on_join_pressed"]
 [connection signal="pressed" from="UI/Multiplayer/VBoxContainer/Host" to="UI/Multiplayer" method="_on_host_pressed"]
 [connection signal="pressed" from="UI/Multiplayer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="UI/Multiplayer/VBoxContainer/Start" to="UI/Multiplayer" method="_on_start_pressed"]
+[connection signal="timeout" from="Clock" to="." method="_on_clock_timeout"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgipdr0ngtjcd"]
+
+[ext_resource type="Script" path="res://game/scenes/zombie.gd" id="1_tkicg"]
+[ext_resource type="Texture2D" uid="uid://dl1axaau3dfs0" path="res://game/sprites/Player.png" id="2_ypmhq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5iv8c"]
+radius = 68.0294
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6dyar"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jaki6"]
+radius = 118.339
+
+[node name="Zombie" type="CharacterBody2D" groups=["Zombies"]]
+script = ExtResource("1_tkicg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("2_ypmhq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5iv8c")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_6dyar")
+
+[node name="Detection" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection"]
+shape = SubResource("CircleShape2D_jaki6")
+
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]
+[connection signal="body_shape_entered" from="Detection" to="." method="_on_detection_body_shape_entered"]
