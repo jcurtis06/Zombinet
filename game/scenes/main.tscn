@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c43e5swweyipi"]
+[gd_scene load_steps=10 format=3 uid="uid://c43e5swweyipi"]
 
 [ext_resource type="Script" path="res://game/scenes/main.gd" id="1_wrrka"]
 [ext_resource type="Script" path="res://game/scenes/ui.gd" id="2_wx6qr"]
 [ext_resource type="Texture2D" uid="uid://dsfa83baol30l" path="res://game/sprites/bg.png" id="3_cs0d6"]
+[ext_resource type="PackedScene" uid="uid://dae623xveqsx0" path="res://game/scenes/spawner.tscn" id="4_plbyo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wnn7"]
 content_margin_left = 10.0
@@ -150,6 +151,18 @@ _spawnable_scenes = PackedStringArray("res://game/scenes/zombie.tscn")
 spawn_path = NodePath("..")
 
 [node name="Clock" type="Timer" parent="."]
+
+[node name="Spawner" parent="." instance=ExtResource("4_plbyo")]
+position = Vector2(72, 65)
+
+[node name="Spawner2" parent="." instance=ExtResource("4_plbyo")]
+position = Vector2(86, 594)
+
+[node name="Spawner3" parent="." instance=ExtResource("4_plbyo")]
+position = Vector2(1054, 93)
+
+[node name="Spawner4" parent="." instance=ExtResource("4_plbyo")]
+position = Vector2(1026, 605)
 
 [connection signal="pressed" from="UI/Multiplayer/VBoxContainer/HBoxContainer/Join" to="UI/Multiplayer" method="_on_join_pressed"]
 [connection signal="pressed" from="UI/Multiplayer/VBoxContainer/Host" to="UI/Multiplayer" method="_on_host_pressed"]

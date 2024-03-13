@@ -28,6 +28,9 @@ func _start_game():
 		var zombie = zombie_tscn.instantiate()
 		_zombie_spawn.add_child(zombie, true)
 	
+	for spawner in get_tree().get_nodes_in_group("Spawners"):
+		spawner.start()
+	
 	clock.start()
 
 func _on_clock_timeout():
