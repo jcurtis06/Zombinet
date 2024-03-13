@@ -3,7 +3,6 @@ extends Node2D
 @onready var player_tscn: PackedScene = preload("res://game/scenes/player_sandbox.tscn")
 @onready var zombie_tscn: PackedScene = preload("res://game/scenes/zombie.tscn")
 
-@onready var _zombie_spawn: Node2D = $ZombieSpawn
 @onready var clock: Timer = $Clock
 
 var time = 1200
@@ -24,9 +23,6 @@ func _start_game():
 		var player = player_tscn.instantiate()
 		player.name = str(peer)
 		add_child(player, true)
-		
-		var zombie = zombie_tscn.instantiate()
-		_zombie_spawn.add_child(zombie, true)
 	
 	for spawner in get_tree().get_nodes_in_group("Spawners"):
 		spawner.start()

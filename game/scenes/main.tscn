@@ -143,26 +143,24 @@ stretch_mode = 1
 _spawnable_scenes = PackedStringArray("res://game/scenes/player_sandbox.tscn")
 spawn_path = NodePath("..")
 
-[node name="ZombieSpawn" type="Node2D" parent="."]
-position = Vector2(843, 453)
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ZombieSpawn"]
-_spawnable_scenes = PackedStringArray("res://game/scenes/zombie.tscn")
-spawn_path = NodePath("..")
-
 [node name="Clock" type="Timer" parent="."]
 
-[node name="Spawner" parent="." instance=ExtResource("4_plbyo")]
-position = Vector2(72, 65)
+[node name="Spawners" type="Node" parent="."]
 
-[node name="Spawner2" parent="." instance=ExtResource("4_plbyo")]
-position = Vector2(86, 594)
+[node name="Spawner" parent="Spawners" instance=ExtResource("4_plbyo")]
+position = Vector2(-500, -278)
 
-[node name="Spawner3" parent="." instance=ExtResource("4_plbyo")]
-position = Vector2(1054, 93)
+[node name="Spawner2" parent="Spawners" instance=ExtResource("4_plbyo")]
+position = Vector2(-486, 251)
 
-[node name="Spawner4" parent="." instance=ExtResource("4_plbyo")]
-position = Vector2(1026, 605)
+[node name="Spawner3" parent="Spawners" instance=ExtResource("4_plbyo")]
+position = Vector2(482, -250)
+
+[node name="Spawner4" parent="Spawners" instance=ExtResource("4_plbyo")]
+position = Vector2(454, 262)
+
+[node name="GameCamera" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
 
 [connection signal="pressed" from="UI/Multiplayer/VBoxContainer/HBoxContainer/Join" to="UI/Multiplayer" method="_on_join_pressed"]
 [connection signal="pressed" from="UI/Multiplayer/VBoxContainer/Host" to="UI/Multiplayer" method="_on_host_pressed"]
